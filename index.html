@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Information Report (FIR)</title>
+    
+</head>
+
+<body>
+
+    <div class="form-container" id="pdf-content">
+        <table class="header-table">
+            <tr>
+                <td rowspan="2" style="width: 10%; text-align: center;">
+                    <img src="hpcl-logo.png" alt="HP Logo" class="hp-logo">
+                </td>
+                <td class="header-left">
+                    <strong>Hindustan Petroleum Corporation Limited</strong><br><br>
+                    Mumbai Refinery
+                </td>
+                <td rowspan="3" class="header-right">
+                    Issue No: 1<br>
+                    Issue Date: 6/11/2024<br>
+                    Rev No: 0<br>
+                    Rev Date:<br>
+                    <span class="no-wrap">Doc No: HPCL MR/FRM/F&S/08200-12</span>
+                </td>
+                
+            </tr>
+            <tr>
+                <td class="header-left">
+                    <strong>First Information Report (FIR)</strong>
+                </td>
+               
+            </tr>
+           
+        </table>
+
+
+        <!-- Status Section -->
+        <h3>SHIFT OFFICERS FIRST HAND INFORMATION REPORT</h3>
+        <table>
+            <tr>
+                <td>Date of Incident</td>
+                <td>
+                    <input type="date" name="Date"></td>
+            </tr>
+            <tr>        
+
+                <td>Time of Incident</td>
+                <td> <input type="time" name="Time"></td>
+             </tr>
+             <tr>   
+
+                <td>Call Given By</td>
+                <td><input type="text" name="call"></td>
+                
+            </tr>
+            <tr>
+                <td>Unit</td>
+                <td>
+                    <select name="type" id="unitSelect">
+                        <option value="">Select</option>
+                        <option value="FRE">FRE</option>
+                        <option value="Laboratory">Laboratory</option>
+                        <option value="Old boiler house">Old Boiler House</option>
+                        <option value="New FCCU">New FCCU</option>
+                        <option value="LPG Area">LPG Area</option>
+                        <option value="IETP">IETP</option>
+                        <option value="PTU">PTU</option>
+                        <option value="FR-Offsite">FR-Offsite</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <input 
+                        type="text" 
+                        id="otherInput" 
+                        name="otherType" 
+                        placeholder="Specify other unit" 
+                        style="display:none;" 
+                    />
+                </td>
+            </tr>
+            <tr>
+                <td>Exact Location</td>
+                <td><input type="text" name="location"></td>
+                </tr>
+                <tr>
+                <td>Type of Incident</td>
+                <td><select name="incident">
+                            <option value="">Select</option>
+                            <option>Minor fire</option>
+                            <option>Major fire</option>
+                            <option>Injury</option>
+                            <option>HI-PO Nearmiss</option>
+                            <option>Vehicle Incident</option>
+                            <option>First aid injury</option>
+                            <option>Fatal</option>
+                            <option>LTA</option>
+                    </select></td>
+                
+            </tr>
+            <tr>
+                <td>Call received in Fire C/R</td>
+                <td><input type="text" name="callrecieved"></td>
+                    </tr>
+                <td>Status</td>
+                <td><select name="status">
+                            <option value="">Select</option>
+                            <option>Refer to hospital</option>
+                            <option>Back to work</option>
+                            <option>Sent Home</option>
+                            <option>N/A</option>
+                    </select></td>
+            </tr>
+
+            <tr>
+                <td>Division</td>
+                <td>
+                    <select name="division" id="divisionSelect">
+                        <option value="">Select</option>
+                        <option value="Project">Project</option>
+                        <option value="Operation">Operation</option>
+                        <option value="Maintenance">Maintenance</option>
+                        <option value="CES">CES</option>
+                        <option value="Offsite Maintenance">Offsite Maintenance</option>
+                        <option value="HR">HR</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <input 
+                        type="text" 
+                        id="otherDivisionInput" 
+                        name="otherDivision" 
+                        placeholder="Specify other division" 
+                        style="display:none;" 
+                    />
+                </td>
+            </tr>
+            <tr>   
+
+                <td>Employee/Contractor name</td>
+                <td><input type="text" name="name"></td>
+                
+            </tr>
+
+            <tr>
+                <td>Description</td>
+                <td>
+                  <!-- Textarea for Description -->
+                  <textarea id="description" name="description" rows="5" cols="60"></textarea>
+                </td>
+              </tr>
+
+
+              <tr>
+                <td>Incident Location Pic-1</td>
+                <td>
+                    <!-- Image preview element -->
+                    <img id="imagePreview1" style="display: none; width: 100px; height: auto;">
+                    <br>
+                    <!-- File input element with onchange event -->
+                    <input type="file" id="profilePicture1" name="profile" accept="image/jpeg, image/png, image/gif" onchange="displayImage(this, 'IncidentLocationPic1', 'imagePreview1')">
+                </td>
+            </tr>
+            <tr>
+                <td>Incident Location Pic-2</td>
+                <td>
+                    <img id="imagePreview2" style="display: none; width: 100px; height: auto;">
+                    <br>
+                    <input type="file" id="profilePicture2" name="profilepic" accept="image/jpeg, image/png, image/gif" onchange="displayImage(this, 'IncidentLocationPic2', 'imagePreview2')">
+                </td>
+            </tr>
+        </table>
+
+        
+        <!-- Save as PDF Button (will be hidden in PDF) -->
+        <button id="saveAsPdf">Save as PDF</button>
+    </div>
+
+    <script src="script.js"></script>
+
+    </body>
+    </html>
+
+       
